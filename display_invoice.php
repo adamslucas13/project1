@@ -1,14 +1,15 @@
 <?php
-$customer_first_name = filter_input(INPUT_POST, 'cust_fName');
-$customer_last_name = filter_input(INPUT_POST, 'cust_lName');
-$labor_cost = filter_input(INPUT_POST, 'labor_cost'),FILTER_VALIDATE_FLOAT);
-$parts_cost = filter_input(INPUT_POST, 'parts_cost'),FILTER_VALIDATE_FLOAT);
+$cust_fname = filter_input(INPUT_POST, 'cust_fname');
+$cust_lname = filter_input(INPUT_POST, 'cust_lname');
+$labor_costs = filter_input(INPUT_POST, 'labor_costs', FILTER_VALIDATE_FLOAT);
+$parts_cost = filter_input(INPUT_POST, 'parts_cost', FILTER_VALIDATE_FLOAT);
 
-if (empty($cust_fName)){
+if (empty($cust_fname)){
     $error_message = 'First name is a required field.';
-} else if(empty($cust_lName)) {
+} else if(empty($cust_lname)) {
     $error_message = 'Last name is a required field.';
-} else if($labor_cost === FALSE) {
+} else if($labor_costs === FALSE) {
+} else if(empty($labor_costs)) {
     $error_message = 'labor cost must be a valid number';
 } else if($labor_cost <= 0) {
     $error_message = 'labor cost must be greater than zero';
@@ -24,12 +25,21 @@ if($error_message != '') {
     include('index.php');
     exit();   
 }
-define(TAX_RATE,  9.25%);
+define('TAX_RATE',  .0925);
+$parts_cost + $labor_cost = $subtotal;
+$sales_tax = $subTotal * TAX_RATE;
+$subTotal + $sales_tax = $total;
+echo $total;
 
 
 
+
+
+
+
+//$f_cust_name = $cust_fname.( )$cust_lname;
 //Use the define() function to create a constant TAX_RATE equal to
-.//0925 or 9.25%. You will need variables called: $subTotal, $total, $sales_tax. The final section of 
+//0925 or 9.25%. You will need variables called: $subTotal, $total, $sales_tax. The final section of 
 
 
 //get the data from the form and filter input
@@ -55,22 +65,22 @@ define(TAX_RATE,  9.25%);
         <h1>Dooley's Automotive</h1>
 
         <label>Customer's Name:</label>
-        <span><?php echo htmlspecialchars($cust_fName); ?></span><br>
+        <span><?php echo $f_cust_name; ?></span><br>
 
         <label>Labor Costs:</label>
-        <span><?php echo htmlspecialchars($cust_lName); ?></span><br>
+        <span><?php echo $labor_costs; ?></span><br>
 
         <label>Parts Cost:</label>
-        <span><?php echo htmlspecialchars($parts_cost); ?></span><br>
+        <span><?php echo $parts_costs; ?></span><br>
 
         <label>Subtotal:</label>
-        <span><?php echo htmlspecialchars($subtotal); ?></span><br>
+        <span><?php echo $subtotal; ?></span><br>
 		
 		<label>Sales Tax:</label>
-        <span><?php echo htmlspecialchars($sales_tax); ?></span><br>
+        <span><?php echo $sales_tax; ?></span><br>
 
         <label>Total:</label>
-        <span><?php echo htmlspecialchars($total); ?></span><br>
+        <span><?php echo $total; ?></span><br>
     </main>
 </body>
 </html>
